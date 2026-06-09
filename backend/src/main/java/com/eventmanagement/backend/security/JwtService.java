@@ -21,15 +21,25 @@ public class JwtService {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    public String generateToken(String email) {
+//    public String generateToken(String email) {
+//
+//        return Jwts.builder()
+//                .subject(email)
+//                .issuedAt(new Date())
+//                .expiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
+//                .signWith(getSigningKey())
+//                .compact();
+//    }
+public String generateToken(String email, String role) {
 
-        return Jwts.builder()
-                .subject(email)
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
-                .signWith(getSigningKey())
-                .compact();
-    }
+    return Jwts.builder()
+            .subject(email)
+            .claim("role", role)
+            .issuedAt(new Date())
+            .expiration(new Date(System.currentTimeMillis() + 86400000))
+            .signWith(getSigningKey())
+            .compact();
+}
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

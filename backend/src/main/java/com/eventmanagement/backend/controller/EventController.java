@@ -1,0 +1,48 @@
+package com.eventmanagement.backend.controller;
+
+import com.eventmanagement.backend.dto.EventRequest;
+import com.eventmanagement.backend.service.EventService;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+
+import com.eventmanagement.backend.entity.Event;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/events")
+public class EventController {
+
+    private final EventService eventService;
+
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','ORGANIZER')")
+    @PostMapping
+    public String createEvent(
+            @RequestBody EventRequest request) {
+
+        return eventService.createEvent(request);
+    }
+
+    @GetMapping
+    public List<Event> getAllEvents() {
+        return eventService.getAllEvents();
+    }
+
+    @GetMapping("/{id}")
+    public Event getEventById(
+            @PathVariable Long id) {
+
+        return eventService.getEventById(id);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public String deleteEvent(
+            @PathVariable Long id) {
+
+        return eventService.deleteEvent(id);
+    }
+}

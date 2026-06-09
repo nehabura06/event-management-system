@@ -54,6 +54,9 @@ public class UserService {
         }
 
 //        return "Login successful";
-        return jwtService.generateToken(user.getEmail());
+        return jwtService.generateToken(
+                user.getEmail(),
+                user.getRole().name()
+        );
     }
 }
