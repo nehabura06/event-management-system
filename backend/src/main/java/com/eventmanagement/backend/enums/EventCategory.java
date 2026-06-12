@@ -8,5 +8,6 @@ public enum EventCategory {
     WEBINAR,
     HACKATHON,
     CULTURAL,
-    SPORTS
+    SPORTS,
+    COMPETITION
 }

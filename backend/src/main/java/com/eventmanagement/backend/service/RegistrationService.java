@@ -19,15 +19,19 @@ public class RegistrationService {
     private final RegistrationRepository registrationRepository;
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
     public RegistrationService(
             RegistrationRepository registrationRepository,
             EventRepository eventRepository,
-            UserRepository userRepository) {
+            UserRepository userRepository,
+            EmailService emailService) {
 
         this.registrationRepository = registrationRepository;
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
+        this.emailService =
+                emailService;
     }
 
     public String registerForEvent(
@@ -71,6 +75,18 @@ public class RegistrationService {
 
         registrationRepository.save(registration);
 
+        try {
+            emailService.sendRegistrationEmail(
+                    user.getEmail(),
+                    event.getTitle(),
+                    event.getDate().toString(),
+                    event.getVenue()
+            );
+        } catch (Exception e) {
+            System.out.println("Email sending failed: "
+                    + e.getMessage());
+        }
+
         return "Event registration successful";
     }
     public Long getAvailableSeats(Long eventId) {
@@ -107,6 +123,10 @@ public class RegistrationService {
             return "Registration not found";
         }
 
+        emailService.sendCancellationEmail(
+                user.getEmail(),
+                event.getTitle()
+        );
         registrationRepository.delete(registration);
 
         return "Registration cancelled";

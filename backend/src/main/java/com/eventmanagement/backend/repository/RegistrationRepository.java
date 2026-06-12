@@ -20,6 +20,7 @@ public interface RegistrationRepository
     );
 
     List<Registration> findByUser(User user);
+    List<Registration> findByEvent(Event event);
 
     long countByEvent(Event event);
 }

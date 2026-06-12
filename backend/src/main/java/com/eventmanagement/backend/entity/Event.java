@@ -4,6 +4,9 @@ import com.eventmanagement.backend.enums.EventCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
