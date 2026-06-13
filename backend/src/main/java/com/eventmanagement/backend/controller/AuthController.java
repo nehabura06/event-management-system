@@ -4,9 +4,11 @@ import com.eventmanagement.backend.dto.RegisterRequest;
 import com.eventmanagement.backend.dto.LoginRequest;
 import com.eventmanagement.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private final UserService userService;
