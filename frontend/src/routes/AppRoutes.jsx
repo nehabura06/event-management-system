@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
@@ -7,10 +8,7 @@ import AttendeeDashboard from "../pages/AttendeeDashboard";
 import OrganizerDashboard from "../pages/OrganizerDashboard";
 import AdminDashboard from "../pages/AdminDashboard";
 
-import ProtectedRoute from "../components/ProtectedRoute";
-
 function AppRoutes() {
-
   return (
     <BrowserRouter>
 
@@ -18,6 +16,11 @@ function AppRoutes() {
 
         <Route
           path="/"
+          element={<Home />}
+        />
+
+        <Route
+          path="/login"
           element={<Login />}
         />
 
@@ -28,35 +31,17 @@ function AppRoutes() {
 
         <Route
           path="/attendee"
-          element={
-            <ProtectedRoute
-              allowedRoles={["ATTENDEE"]}
-            >
-              <AttendeeDashboard />
-            </ProtectedRoute>
-          }
+          element={<AttendeeDashboard />}
         />
 
         <Route
           path="/organizer"
-          element={
-            <ProtectedRoute
-              allowedRoles={["ORGANIZER"]}
-            >
-              <OrganizerDashboard />
-            </ProtectedRoute>
-          }
+          element={<OrganizerDashboard />}
         />
 
         <Route
           path="/admin"
-          element={
-            <ProtectedRoute
-              allowedRoles={["ADMIN"]}
-            >
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
+          element={<AdminDashboard />}
         />
 
       </Routes>
