@@ -1,16 +1,16 @@
 function Categories() {
 
  const categories = [
-   "🎤 Conferences",
-   "🎓 Workshops",
-   "🏆 Competitions",
-   "🎭 Cultural",
-   "💡 Seminars",
+   "Conferences",
+   "Workshops",
+   "Competitions",
+   "Hackathons",
+   "Seminars",
  ];
 
   return (
 
-    <section className="py-14 px-8 bg-gray-50">
+    <section className="py-8 px-8 bg-gray-50">
 
       <div className="max-w-7xl mx-auto text-center">
 

@@ -118,7 +118,7 @@ function Hero() {
               </p>
 
               <p className="text-gray-500 text-sm">
-                Admin • Organizer • Attendee
+                  Organizer • Attendee
               </p>
             </div>
 

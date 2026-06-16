@@ -45,6 +45,7 @@ public class SecurityConfig {
             throws Exception {
 
         http
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
 
                 .sessionManagement(session ->
@@ -56,6 +57,9 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/register",
                                 "/api/auth/login",
+                                "/api/events/**",
+                                "/api/registrations/seats/**",
+                                "/api/feedback/event/**",
                                 "/api/test/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",

@@ -8,6 +8,9 @@ import AttendeeDashboard from "../pages/AttendeeDashboard";
 import OrganizerDashboard from "../pages/OrganizerDashboard";
 import AdminDashboard from "../pages/AdminDashboard";
 
+import Events from "../pages/Events";
+import EventDetails from "../pages/EventDetails";
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -42,6 +45,16 @@ function AppRoutes() {
         <Route
           path="/admin"
           element={<AdminDashboard />}
+        />
+
+        <Route
+          path="/events"
+          element={<Events />}
+        />
+
+        <Route
+          path="/events/:id"
+          element={<EventDetails />}
         />
 
       </Routes>

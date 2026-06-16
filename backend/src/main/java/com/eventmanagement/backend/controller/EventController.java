@@ -9,6 +9,7 @@ import com.eventmanagement.backend.enums.EventCategory;
 import com.eventmanagement.backend.entity.Event;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
@@ -56,13 +57,20 @@ public class EventController {
         return eventService.updateEvent(id, request);
     }
 
-    @GetMapping("/search")
-    public List<Event> searchByTitle(
-            @RequestParam String title) {
+//    @GetMapping("/search")
+//    public List<Event> searchByTitle(
+//            @RequestParam String title) {
+//
+//        return eventService
+//                .searchByTitle(title);
+//    }
+@GetMapping("/search")
+public List<Event> searchEvents(
+        @RequestParam String keyword) {
 
-        return eventService
-                .searchByTitle(title);
-    }
+    return eventService
+            .searchEvents(keyword);
+}
     @GetMapping("/category/{category}")
     public List<Event> getByCategory(
             @PathVariable EventCategory category) {

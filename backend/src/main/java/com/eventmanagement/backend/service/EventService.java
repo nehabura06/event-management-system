@@ -9,8 +9,7 @@ import java.time.LocalDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-
+import java.util.ArrayList;
 
 @Service
 public class EventService {
@@ -73,12 +72,71 @@ public class EventService {
         return "Event updated successfully";
     }
 
-    public List<Event> searchByTitle(
-            String title) {
+//    public List<Event> searchByTitle(
+//            String title) {
+//
+//        return eventRepository
+//                .findByTitleContainingIgnoreCase(title);
+//    }
+public List<Event> searchEvents(String keyword) {
 
-        return eventRepository
-                .findByTitleContainingIgnoreCase(title);
+    keyword = keyword.trim();
+
+    LocalDate today = LocalDate.now();
+
+    List<Event> results = new ArrayList<>();
+
+    // Search by title
+    eventRepository
+            .searchUpcomingByTitle(
+                    keyword,
+                    today)
+            .forEach(event -> {
+
+                if (!results.contains(event)) {
+                    results.add(event);
+                }
+
+            });
+
+    // Search by venue
+    eventRepository
+            .searchUpcomingByVenue(
+                    keyword,
+                    today)
+            .forEach(event -> {
+
+                if (!results.contains(event)) {
+                    results.add(event);
+                }
+
+            });
+
+    // Search by category
+    try {
+
+        EventCategory category =
+                EventCategory.valueOf(
+                        keyword.toUpperCase());
+
+        eventRepository
+                .findByCategoryAndDateAfter(
+                        category,
+                        today)
+                .forEach(event -> {
+
+                    if (!results.contains(event)) {
+                        results.add(event);
+                    }
+
+                });
+
+    } catch (Exception e) {
+        // Invalid category
     }
+
+    return results;
+}
     public List<Event> getByCategory(
             EventCategory category) {
 
@@ -94,6 +152,7 @@ public class EventService {
     public List<Event> getUpcomingEvents() {
 
         return eventRepository
-                .findByDateAfter(LocalDate.now());
+                .findByDateGreaterThanEqual(
+                        LocalDate.now());
     }
 }

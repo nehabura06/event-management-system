@@ -4,7 +4,7 @@ function AboutUs() {
 
     <section
       id="about"
-      className="py-12 px-8 bg-indigo-50"
+      className="scroll-mt-24 py-12 px-8 bg-indigo-50"
     >
 
       <div className="max-w-6xl mx-auto text-center">

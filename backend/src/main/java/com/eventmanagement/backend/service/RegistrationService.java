@@ -142,4 +142,21 @@ public class RegistrationService {
         return registrationRepository
                 .findByUser(user);
     }
+
+    //
+    public boolean isRegistered(
+            Long eventId,
+            String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() ->
+                        new RuntimeException("Event not found"));
+
+        return registrationRepository
+                .existsByUserAndEvent(user, event);
+    }
 }

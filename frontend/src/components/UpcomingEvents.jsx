@@ -1,116 +1,278 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import {
+  getUpcomingEvents,
+} from "../services/eventService";
+
 function UpcomingEvents() {
 
-  const events = [
-    {
-      id: 1,
-      title: "AI Workshop",
-      date: "20 June 2026",
-      venue: "Seminar Hall A",
-      seats: 45,
-      image:
-        "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200",
-    },
-    {
-      id: 2,
-      title: "Code Quest Hackathon",
-      date: "15 July 2026",
-      venue: "Tech Hub",
-      seats: 20,
-      image:
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200",
-    },
-    {
-      id: 3,
-      title: "Cultural Fest",
-      date: "5 August 2026",
-      venue: "Open Grounds",
-      seats: 100,
-      image:
-        "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200",
-    },
-  ];
+  const [events, setEvents] =
+    useState([]);
+
+  const navigate =
+    useNavigate();
+
+  useEffect(() => {
+
+    fetchEvents();
+
+  }, []);
+
+  const fetchEvents = async () => {
+
+    try {
+
+      const response =
+        await getUpcomingEvents();
+
+      // Show only first 3 events
+      setEvents(
+        response.data.slice(0, 3)
+      );
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
+  const getImage = (category) => {
+
+    switch (category) {
+
+      case "WORKSHOP":
+        return "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200";
+
+      case "CONFERENCE":
+        return "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200";
+
+      case "CULTURAL":
+        return "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200";
+
+      case "HACKATHON":
+        return "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200";
+
+      case "SEMINAR":
+        return "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200";
+
+      case "COMPETITION":
+        return "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200";
+
+      default:
+        return "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200";
+
+    }
+
+  };
 
   return (
-    <section className="py-12 px-8 bg-white">
+
+    <section className="py-8 px-8 bg-white">
 
       <div className="max-w-7xl mx-auto">
 
-        <div className="flex justify-between items-center mb-8">
+        <div className="text-center mb-8">
 
-          <div>
-            <p className="text-indigo-600 font-semibold uppercase text-2xl">
-              Upcoming Events
-            </p>
-          </div>
+          <p
+            className="
+              text-indigo-600
+              font-bold
+              uppercase
+              text-3xl
+            "
+          >
+            Upcoming Events
+          </p>
+
+          <p
+            className="
+              text-gray-600
+              mt-3
+            "
+          >
+            Explore exciting upcoming events.
+          </p>
 
         </div>
 
-        <div className="grid md:grid-cols-3 gap-7">
+        <div
+          className="
+            grid
+            md:grid-cols-3
+            gap-7
+          "
+        >
 
-          {events.map((event) => (
+          {events.map((event) => {
 
-            <div
-              key={event.id}
-              className="
-                bg-white
-                rounded-3xl
-                shadow-lg
-                overflow-hidden
-                hover:-translate-y-2
-                transition
-              "
-            >
+            const formattedDate =
+              new Date(event.date)
+                .toLocaleDateString(
+                  "en-IN",
+                  {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  }
+                );
 
-              <img
-                src={event.image}
-                alt={event.title}
-                className="h-50 w-full object-cover"
-              />
+            return (
 
-              <div className="p-6">
+              <div
+                key={event.id}
+                className="
+                  bg-white
+                  rounded-3xl
+                  shadow-lg
+                  overflow-hidden
+                  hover:-translate-y-2
+                  transition
+                  flex
+                  flex-col
+                  h-full
 
-                <p className="text-indigo-600 text-sm">
-                  📅 {event.date}
-                </p>
+                "
+              >
 
-                <h3 className="text-2xl font-bold mt-2">
-                  {event.title}
-                </h3>
-
-                <p className="text-gray-500 mt-2">
-                  📍 {event.venue}
-                </p>
-
-                <p className="text-purple-600 mt-1">
-                  👥 Seats Left: {event.seats}
-                </p>
-
-                <button
+                <img
+                  src={getImage(
+                    event.category
+                  )}
+                  alt={event.title}
                   className="
-                    mt-5
+                    h-52
                     w-full
-                    border
-                    border-indigo-300
-                    py-3
-                    rounded-xl
-                    font-semibold
-                    hover:bg-indigo-50
+                    object-cover
+                  "
+                />
+
+                <div
+                  className="
+                    p-6
+                    flex
+                    flex-col
+                    flex-grow
                   "
                 >
-                  View Details
-                </button>
+
+                  <p
+                    className="
+                      text-indigo-700
+                      text-sm
+                    "
+                  >
+                    {formattedDate}
+                  </p>
+
+                  <h3
+                    className="
+                      text-2xl
+                      font-bold
+                      mt-2
+                    "
+                  >
+                    {event.title}
+                  </h3>
+
+                  <p
+                    className="
+                      text-gray-600
+                      mt-3
+                      line-clamp-2
+                    "
+                  >
+                    {event.description}
+                  </p>
+
+                  <p
+                    className="
+                      text-gray-700
+                      mt-4
+                    "
+                  >
+                    {event.venue}
+                  </p>
+
+                  <p
+                    className="
+                      text-purple-600
+                      mt-1
+                    "
+                  >
+                    Capacity:
+                    {" "}
+                    {event.capacity}
+                  </p>
+
+                  <div
+                    className="
+                      mt-auto
+                      pt-5
+                    "
+                  >
+
+                    <button
+                      onClick={() =>
+                        navigate(
+                          `/events/${event.id}`
+                        )
+                      }
+                      className="
+                        w-full
+                        border
+                        border-indigo-400
+                        text-indigo-600
+                        py-3
+                        rounded-xl
+                        font-semibold
+                        hover:bg-indigo-50
+                        transition
+                      "
+                    >
+                      View Details →
+                    </button>
+
+                  </div>
+
+                </div>
 
               </div>
 
-            </div>
+            );
 
-          ))}
+          })}
+
+        </div>
+
+        <div className="mt-8 text-center">
+
+          <button
+            onClick={() =>
+              navigate("/events")
+            }
+            className="
+              px-8
+              py-3
+              rounded-xl
+              bg-gradient-to-r
+              from-indigo-600
+              to-purple-600
+              text-white
+              font-semibold
+            "
+          >
+            View All Events
+          </button>
 
         </div>
 
       </div>
 
     </section>
+
   );
 }
 

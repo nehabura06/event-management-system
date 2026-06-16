@@ -108,12 +108,12 @@ function Navbar() {
               Dashboard
             </button>
 
-            <Link
-              to="/profile"
-              className="font-semibold text-indigo-700"
-            >
-              Profile
-            </Link>
+{/*             <Link */}
+{/*               to="/profile" */}
+{/*               className="font-semibold text-indigo-700" */}
+{/*             > */}
+{/*               Profile */}
+{/*             </Link> */}
 
             <button
               onClick={handleLogout}

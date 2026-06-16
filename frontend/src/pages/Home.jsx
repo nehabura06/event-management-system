@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import UpcomingEvents from "../components/UpcomingEvents";
 import Categories from "../components/Categories";
-import Features from "../components/Features";
+// import Features from "../components/Features";
 import AboutUs from "../components/AboutUs";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
@@ -15,7 +15,7 @@ function Home() {
       <Hero />
       <UpcomingEvents />
       <Categories />
-      <Features />
+{/*       <Features /> */}
       <HowItWorks />
       <AboutUs />
       <Contact />

@@ -14,15 +14,18 @@ public class FeedbackService {
     private final FeedbackRepository feedbackRepository;
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
+    private final RegistrationRepository registrationRepository;
 
     public FeedbackService(
             FeedbackRepository feedbackRepository,
             UserRepository userRepository,
-            EventRepository eventRepository) {
+            EventRepository eventRepository,
+            RegistrationRepository registrationRepository) {
 
         this.feedbackRepository = feedbackRepository;
         this.userRepository = userRepository;
         this.eventRepository = eventRepository;
+        this.registrationRepository = registrationRepository;
     }
 
     public String submitFeedback(
@@ -37,6 +40,17 @@ public class FeedbackService {
                         request.getEventId())
                 .orElseThrow(() ->
                         new RuntimeException("Event not found"));
+
+        boolean registered =
+                registrationRepository
+                        .existsByUserAndEvent(
+                                user,
+                                event
+                        );
+
+        if (!registered) {
+            return "Register for the event before submitting feedback";
+        }
 
         boolean alreadySubmitted =
                 feedbackRepository
@@ -69,5 +83,23 @@ public class FeedbackService {
                         new RuntimeException("Event not found"));
 
         return feedbackRepository.findByEvent(event);
+    }
+    public boolean hasSubmittedFeedback(
+            Long eventId,
+            String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() ->
+                        new RuntimeException("Event not found"));
+
+        return feedbackRepository
+                .existsByUserAndEvent(
+                        user,
+                        event
+                );
     }
 }

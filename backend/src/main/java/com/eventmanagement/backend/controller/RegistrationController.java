@@ -9,6 +9,7 @@ import java.util.List;
 import com.eventmanagement.backend.entity.Registration;
 import org.springframework.security.access.prepost.PreAuthorize;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/registrations")
 public class RegistrationController {
@@ -59,5 +60,16 @@ public class RegistrationController {
         return registrationService
                 .getMyRegistrations(
                         authentication.getName());
+    }
+    //
+    @GetMapping("/check/{eventId}")
+    @PreAuthorize("hasRole('ATTENDEE')")
+    public boolean isRegistered(
+            @PathVariable Long eventId,
+            Authentication authentication) {
+
+        return registrationService.isRegistered(
+                eventId,
+                authentication.getName());
     }
 }

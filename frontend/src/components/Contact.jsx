@@ -16,15 +16,15 @@ function Contact() {
         <div className="mt-4 space-y-2 text-lg">
 
           <p>
-            📧 support@eventsphere.com
+            support@eventsphere.com
           </p>
 
           <p>
-            📞 +91 9876543210
+            +91 1234567890
           </p>
 
           <p>
-            📍 Mumbai, India
+            Mumbai, India
           </p>
 
         </div>

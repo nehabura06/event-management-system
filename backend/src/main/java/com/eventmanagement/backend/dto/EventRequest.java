@@ -24,4 +24,6 @@ public class EventRequest {
     private Integer capacity;
 
     private EventCategory category;
+
+//    private String organizer;
 }

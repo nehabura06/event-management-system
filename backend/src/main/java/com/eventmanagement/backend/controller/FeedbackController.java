@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.eventmanagement.backend.entity.Feedback;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/feedback")
 public class FeedbackController {
@@ -32,12 +33,25 @@ public class FeedbackController {
                 authentication.getName());
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','ORGANIZER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','ORGANIZER')")
     @GetMapping("/event/{eventId}")
     public List<Feedback> getFeedbackByEvent(
             @PathVariable Long eventId) {
 
         return feedbackService.getFeedbackByEvent(eventId);
+    }
+
+    @GetMapping("/check/{eventId}")
+    @PreAuthorize("hasRole('ATTENDEE')")
+    public boolean hasFeedback(
+            @PathVariable Long eventId,
+            Authentication authentication) {
+
+        return feedbackService
+                .hasSubmittedFeedback(
+                        eventId,
+                        authentication.getName()
+                );
     }
 }
 
