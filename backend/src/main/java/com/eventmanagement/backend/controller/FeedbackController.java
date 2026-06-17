@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import com.eventmanagement.backend.entity.Feedback;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = {
+//        "http://localhost:5173",
+//        "http://localhost:5174"
+//})
 @RestController
 @RequestMapping("/api/feedback")
 public class FeedbackController {

@@ -5,11 +5,16 @@ import com.eventmanagement.backend.service.EventService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import com.eventmanagement.backend.enums.EventCategory;
+import org.springframework.security.core.Authentication;
 
 import com.eventmanagement.backend.entity.Event;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = {
+//        "http://localhost:5173",
+//        "http://localhost:5174"
+//})
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
@@ -23,9 +28,12 @@ public class EventController {
     @PreAuthorize("hasAnyRole('ADMIN','ORGANIZER')")
     @PostMapping
     public String createEvent(
-            @RequestBody EventRequest request) {
-
-        return eventService.createEvent(request);
+            @RequestBody EventRequest request,
+            Authentication authentication) {
+        return eventService
+                .createEvent(
+                        request,
+                        authentication.getName());
     }
 
     @GetMapping
@@ -57,13 +65,6 @@ public class EventController {
         return eventService.updateEvent(id, request);
     }
 
-//    @GetMapping("/search")
-//    public List<Event> searchByTitle(
-//            @RequestParam String title) {
-//
-//        return eventService
-//                .searchByTitle(title);
-//    }
 @GetMapping("/search")
 public List<Event> searchEvents(
         @RequestParam String keyword) {
@@ -90,5 +91,16 @@ public List<Event> searchEvents(
 
         return eventService
                 .getUpcomingEvents();
+    }
+
+    @GetMapping("/my")
+    @PreAuthorize(
+            "hasRole('ORGANIZER')")
+    public List<Event> getMyEvents(
+            Authentication authentication) {
+
+        return eventService
+                .getMyEvents(
+                        authentication.getName());
     }
 }

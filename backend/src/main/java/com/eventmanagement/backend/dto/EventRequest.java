@@ -19,11 +19,15 @@ public class EventRequest {
 
     private LocalDate date;
 
+    private LocalDate endDate;
+
     private LocalTime time;
 
     private Integer capacity;
 
     private EventCategory category;
 
-//    private String organizer;
+    private String organizer;
+
+    private String contactEmail;
 }

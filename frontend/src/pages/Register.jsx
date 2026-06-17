@@ -38,17 +38,35 @@ function Register() {
         role: formData.role
       });
 
-      alert(response.data);
+alert(response.data.message);
 
+localStorage.setItem(
+  "token",
+  response.data.token
+);
       navigate("/");
 
     } catch (error) {
 
-      alert(
-        error.response?.data ||
-        "Registration failed"
-      );
-    }
+        if (
+          error.response?.data ===
+          "Email already exists"
+        ) {
+
+          alert(
+            "Email already exists. Please login or use another email."
+          );
+
+        } else {
+
+          alert(
+            error.response?.data ||
+            "Registration failed"
+          );
+
+        }
+
+      }
   };
 
   return (

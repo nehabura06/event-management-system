@@ -9,7 +9,11 @@ import java.util.List;
 import com.eventmanagement.backend.entity.Registration;
 import org.springframework.security.access.prepost.PreAuthorize;
 
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = {
+//        "http://localhost:5173",
+//        "http://localhost:5174"
+//})
 @RestController
 @RequestMapping("/api/registrations")
 public class RegistrationController {

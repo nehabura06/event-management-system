@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "events")
 @Getter
@@ -33,12 +35,26 @@ public class Event {
 
     private LocalDate date;
 
+//    @Column(nullable = false)
+    private LocalDate endDate;
+
     private LocalTime time;
 
     private Integer capacity;
 
     @Enumerated(EnumType.STRING)
     private EventCategory category;
+
+    private String organizer;      // NEW
+
+    private String contactEmail;   // NEW
+
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    @JsonIgnoreProperties({
+            "password"
+    })
+    private User createdBy;
 
     private LocalDateTime createdAt;
 }

@@ -20,3 +20,19 @@ export const searchEvents = (keyword) =>
 
 export const getEventsByCategory = (category) =>
   axios.get(`${API_URL}/category/${category}`);
+
+export const createEvent = (
+  eventData
+) =>
+  axios.post(
+    API_URL,
+    eventData,
+    {
+      headers: {
+        Authorization:
+          `Bearer ${localStorage.getItem(
+            "token"
+          )}`,
+      },
+    }
+  );

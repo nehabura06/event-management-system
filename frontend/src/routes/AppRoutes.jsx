@@ -11,6 +11,9 @@ import AdminDashboard from "../pages/AdminDashboard";
 import Events from "../pages/Events";
 import EventDetails from "../pages/EventDetails";
 
+import CreateEvent
+  from "../pages/CreateEvent";
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -40,6 +43,11 @@ function AppRoutes() {
         <Route
           path="/organizer"
           element={<OrganizerDashboard />}
+        />
+
+        <Route
+          path="/create-event"
+          element={<CreateEvent />}
         />
 
         <Route

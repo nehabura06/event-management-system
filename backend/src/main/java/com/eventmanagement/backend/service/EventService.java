@@ -5,6 +5,8 @@ import com.eventmanagement.backend.entity.Event;
 import com.eventmanagement.backend.repository.EventRepository;
 import org.springframework.stereotype.Service;
 import com.eventmanagement.backend.enums.EventCategory;
+import com.eventmanagement.backend.entity.User;
+import com.eventmanagement.backend.repository.UserRepository;
 import java.time.LocalDate;
 
 import java.time.LocalDateTime;
@@ -15,25 +17,61 @@ import java.util.ArrayList;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
-    public EventService(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public EventService(EventRepository eventRepository,
+                        UserRepository userRepository) {
+        this.eventRepository =
+                eventRepository;
+        this.userRepository =
+                userRepository;
     }
 
-    public String createEvent(EventRequest request) {
+    public String createEvent(EventRequest request,
+                              String email) {
 
+        User user = userRepository
+                        .findByEmail(email)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+
+                                        "User not found"));
+//         Add validation here
+        if (request.getEndDate() == null) {
+
+            throw new RuntimeException(
+                    "End date is required");
+        }
+        if (request.getEndDate()
+                .isBefore(
+                        request.getDate())) {
+
+            throw new RuntimeException(
+                    "End date cannot be before start date");
+        }
+
+        System.out.println("Received capacity: "
+                + request.getCapacity());
         Event event = Event.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .venue(request.getVenue())
                 .date(request.getDate())
+                .endDate(request.getEndDate())
                 .time(request.getTime())
                 .capacity(request.getCapacity())
                 .category(request.getCategory())
+                .organizer(request.getOrganizer())
+                .contactEmail(request.getContactEmail())
                 .createdAt(LocalDateTime.now())
+                .createdBy(user)
                 .build();
 
+
         eventRepository.save(event);
+
+        System.out.println("Saved capacity: "
+                + event.getCapacity());
 
         return "Event created successfully";
     }
@@ -59,25 +97,38 @@ public class EventService {
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
 
+        if (request.getEndDate() == null) {
+
+            throw new RuntimeException(
+                    "End date is required");
+        }
+
+        if (request.getEndDate()
+                .isBefore(
+                        request.getDate())) {
+
+            throw new RuntimeException(
+                    "End date cannot be before start date");
+        }
+
         event.setTitle(request.getTitle());
         event.setDescription(request.getDescription());
         event.setVenue(request.getVenue());
         event.setDate(request.getDate());
+        event.setEndDate(request.getEndDate());
         event.setTime(request.getTime());
         event.setCapacity(request.getCapacity());
         event.setCategory(request.getCategory());
+        event.setOrganizer(
+                request.getOrganizer());
+        event.setContactEmail(
+                request.getContactEmail());
 
         eventRepository.save(event);
 
         return "Event updated successfully";
     }
 
-//    public List<Event> searchByTitle(
-//            String title) {
-//
-//        return eventRepository
-//                .findByTitleContainingIgnoreCase(title);
-//    }
 public List<Event> searchEvents(String keyword) {
 
     keyword = keyword.trim();
@@ -154,5 +205,17 @@ public List<Event> searchEvents(String keyword) {
         return eventRepository
                 .findByDateGreaterThanEqual(
                         LocalDate.now());
+    }
+    public List<Event> getMyEvents(
+            String email) {
+
+        User user =
+                userRepository
+                        .findByEmail(email)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "User not found"));
+        return eventRepository
+                .findByCreatedBy(user);
     }
 }

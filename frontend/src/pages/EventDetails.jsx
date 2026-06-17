@@ -395,17 +395,43 @@ return (
             "
           >
 
-            <div className="bg-gray-50 p-4 rounded-2xl">
+            <div className="bg-gray-50 p-3 rounded-2xl">
               <h3 className="font-semibold">
                 Date
               </h3>
 
-              <p className="text-gray-600 mt-2">
-                {formattedDate}
-              </p>
+{/*               <p className="text-gray-600 mt-2"> */}
+{/*                 {formattedDate} */}
+{/*               </p> */}
+<p className="text-gray-600 mt-2">
+
+  {formattedDate}
+
+  {event.endDate &&
+   event.endDate !== event.date && (
+
+    <>
+      {" - "}
+
+      {new Date(
+        event.endDate
+      ).toLocaleDateString(
+        "en-IN",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }
+      )}
+
+    </>
+
+   )}
+
+</p>
             </div>
 
-            <div className="bg-gray-50 p-4 rounded-2xl">
+            <div className="bg-gray-50 p-3 rounded-2xl">
               <h3 className="font-semibold">
                 Time
               </h3>
@@ -415,7 +441,7 @@ return (
               </p>
             </div>
 
-            <div className="bg-gray-50 p-4 rounded-2xl">
+            <div className="bg-gray-50 p-3 rounded-2xl">
               <h3 className="font-semibold">
                 Venue
               </h3>
@@ -425,13 +451,32 @@ return (
               </p>
             </div>
 
-            <div className="bg-gray-50 p-4 rounded-2xl">
+            <div className="bg-gray-50 p-3 rounded-2xl">
               <h3 className="font-semibold">
                 Seats Left
               </h3>
 
               <p className="text-gray-600 mt-2">
                 {availableSeats}
+              </p>
+            </div>
+            <div className="bg-gray-50 p-3 rounded-2xl">
+              <h3 className="font-semibold">
+                Organizer
+              </h3>
+
+              <p className="text-gray-600 mt-2">
+                {event.organizer}
+              </p>
+            </div>
+
+            <div className="bg-gray-50 p-3 rounded-2xl">
+              <h3 className="font-semibold">
+                Contact
+              </h3>
+
+              <p className="text-gray-600 mt-2">
+                {event.contactEmail}
               </p>
             </div>
 
@@ -649,7 +694,7 @@ return (
 
                                               ) : role === "ATTENDEE" && registered ? (
 
-                                                <div className="flex justify-center gap-3">
+                                                <div className="flex justify-center gap-4">
 
                                                   <button
                                                     disabled

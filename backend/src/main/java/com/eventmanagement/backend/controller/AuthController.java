@@ -1,5 +1,6 @@
 package com.eventmanagement.backend.controller;
 
+import com.eventmanagement.backend.dto.AuthResponse;
 import com.eventmanagement.backend.dto.RegisterRequest;
 import com.eventmanagement.backend.dto.LoginRequest;
 import com.eventmanagement.backend.service.UserService;
@@ -8,7 +9,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = {
+//        "http://localhost:5173",
+//        "http://localhost:5174"
+//})
 public class AuthController {
 
     private final UserService userService;
@@ -18,7 +22,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
+    public AuthResponse register(
+            @RequestBody RegisterRequest request) {
+
         return userService.register(request);
     }
     @PostMapping("/login")

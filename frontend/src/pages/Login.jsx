@@ -39,12 +39,16 @@ function Login() {
         "token",
         token
       );
+    // Extract role from JWT
+        const role =
+          getRoleFromToken();
 
-      // Extract role from JWT
-      const role =
-        getRoleFromToken();
+  localStorage.setItem(
+    "role",
+    role
+  );
 
-      alert("Login successful");
+  alert("Login successful");
 
       if (role === "ADMIN") {
 

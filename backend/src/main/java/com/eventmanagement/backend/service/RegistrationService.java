@@ -98,6 +98,8 @@ public class RegistrationService {
         long registered =
                 registrationRepository.countByEvent(event);
 
+        System.out.println("Capacity = " + event.getCapacity());
+        System.out.println("Registered = " + registered);
         return event.getCapacity() - registered;
     }
 

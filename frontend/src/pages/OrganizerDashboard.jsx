@@ -15,7 +15,7 @@ function OrganizerDashboard() {
     <div className="p-10">
 
       <h1 className="text-4xl mb-6">
-        Attendee Dashboard
+        Organizer Dashboard
       </h1>
 
       <button
