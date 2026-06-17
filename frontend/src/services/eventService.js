@@ -36,3 +36,16 @@ export const createEvent = (
       },
     }
   );
+
+  export const getMyEvents = () =>
+    axios.get(
+      `${API_URL}/my`,
+      {
+        headers: {
+          Authorization:
+            `Bearer ${localStorage.getItem(
+              "token"
+            )}`,
+        },
+      }
+    );

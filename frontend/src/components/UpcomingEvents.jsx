@@ -90,7 +90,7 @@ function UpcomingEvents() {
           <p
             className="
               text-gray-600
-              mt-3
+              mt-2
             "
           >
             Explore exciting upcoming events.
@@ -102,7 +102,9 @@ function UpcomingEvents() {
           className="
             grid
             md:grid-cols-3
-            gap-7
+            gap-5
+            max-w-6xl
+            mx-auto
           "
         >
 
@@ -132,7 +134,7 @@ function UpcomingEvents() {
                   transition
                   flex
                   flex-col
-                  h-full
+                 min-h-[460px]
 
                 "
               >
@@ -143,7 +145,7 @@ function UpcomingEvents() {
                   )}
                   alt={event.title}
                   className="
-                    h-52
+                    h-40
                     w-full
                     object-cover
                   "
@@ -151,7 +153,7 @@ function UpcomingEvents() {
 
                 <div
                   className="
-                    p-6
+                    p-4
                     flex
                     flex-col
                     flex-grow
@@ -171,7 +173,8 @@ function UpcomingEvents() {
                     className="
                       text-2xl
                       font-bold
-                      mt-2
+                      mt-1
+
                     "
                   >
                     {event.title}
@@ -180,7 +183,7 @@ function UpcomingEvents() {
                   <p
                     className="
                       text-gray-600
-                      mt-3
+                      mt-2
                       line-clamp-2
                     "
                   >
@@ -190,7 +193,7 @@ function UpcomingEvents() {
                   <p
                     className="
                       text-gray-700
-                      mt-4
+                      mt-3
                     "
                   >
                     {event.venue}
@@ -210,7 +213,7 @@ function UpcomingEvents() {
                   <div
                     className="
                       mt-auto
-                      pt-5
+                      pt-4
                     "
                   >
 
@@ -225,7 +228,7 @@ function UpcomingEvents() {
                         border
                         border-indigo-400
                         text-indigo-600
-                        py-3
+                        py-2
                         rounded-xl
                         font-semibold
                         hover:bg-indigo-50

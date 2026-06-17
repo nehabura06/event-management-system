@@ -53,17 +53,17 @@ function EventCard({ event }) {
             transition
             flex
             flex-col
-            h-full
+            min-h-[460px]
           "
     >
 
       <img
         src={getImage(event.category)}
         alt={event.title}
-        className="h-45 w-full object-cover"
+        className="h-40 w-full object-cover"
       />
 
-      <div className="p-5 flex flex-col flex-grow">
+      <div className="p-3 flex flex-col flex-grow">
 
         <p className="text-indigo-700 text-sm">
           {formattedDate}
@@ -74,18 +74,18 @@ function EventCard({ event }) {
           {event.title}
         </h2>
 
-        <p className="text-gray-600 mt-3 line-clamp-3">
+        <p className="text-gray-600 mt-2 line-clamp-3">
           {event.description}
         </p>
 
-        <p className="mt-3 text-gray-600">
+        <p className="mt-2 text-gray-600">
           {event.venue}
         </p>
 
         <p className="text-purple-600">
           Capacity: {event.capacity}
         </p>
-<div className="mt-auto pt-5">
+<div className="mt-auto pt-3">
 
   <button
     onClick={() =>
@@ -93,14 +93,14 @@ function EventCard({ event }) {
     }
     className="
       w-full
-      border
-      border-indigo-500
-      text-indigo-600
-      py-2
-      rounded-xl
-      font-medium
-      hover:bg-indigo-50
-      transition
+                              border
+                              border-indigo-400
+                              text-indigo-600
+                              py-2
+                              rounded-xl
+                              font-semibold
+                              hover:bg-indigo-50
+                              transition
     "
   >
     View Details →
