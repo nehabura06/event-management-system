@@ -76,4 +76,25 @@ public class RegistrationController {
                 eventId,
                 authentication.getName());
     }
+
+    @GetMapping("/organizer/count")
+    @PreAuthorize(
+            "hasRole('ORGANIZER')")
+    public long getOrganizerCount(
+            Authentication authentication) {
+
+        return registrationService
+                .getOrganizerRegistrations(
+                        authentication.getName());
+    }
+
+
+    @GetMapping("/count/{eventId}")
+    public long getEventCount(
+            @PathVariable Long eventId) {
+
+        return registrationService
+                .getEventRegistrationCount(
+                        eventId);
+    }
 }

@@ -49,3 +49,20 @@ export const createEvent = (
         },
       }
     );
+
+    export const updateEvent = (
+      id,
+      eventData
+    ) =>
+      axios.put(
+        `${API_URL}/${id}`,
+        eventData,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${localStorage.getItem(
+                "token"
+              )}`,
+          },
+        }
+      );

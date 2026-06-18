@@ -3,6 +3,7 @@ package com.eventmanagement.backend.service;
 import com.eventmanagement.backend.dto.EventRequest;
 import com.eventmanagement.backend.entity.Event;
 import com.eventmanagement.backend.repository.EventRepository;
+import com.eventmanagement.backend.repository.RegistrationRepository;
 import org.springframework.stereotype.Service;
 import com.eventmanagement.backend.enums.EventCategory;
 import com.eventmanagement.backend.entity.User;
@@ -18,13 +19,17 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
+    private final RegistrationRepository registrationRepository;
 
     public EventService(EventRepository eventRepository,
-                        UserRepository userRepository) {
+                        UserRepository userRepository,
+                        RegistrationRepository registrationRepository) {
         this.eventRepository =
                 eventRepository;
         this.userRepository =
                 userRepository;
+        this.registrationRepository =
+                registrationRepository;
     }
 
     public String createEvent(EventRequest request,
@@ -215,7 +220,22 @@ public List<Event> searchEvents(String keyword) {
                         .orElseThrow(() ->
                                 new RuntimeException(
                                         "User not found"));
-        return eventRepository
-                .findByCreatedBy(user);
+//        return eventRepository
+//                .findByCreatedBy(user);
+        List<Event> events =
+                eventRepository.findByCreatedBy(user);
+
+        events.forEach(event -> {
+
+            event.setRegistrationCount(
+
+                    registrationRepository
+                            .countByEvent(event)
+
+            );
+
+        });
+
+        return events;
     }
 }

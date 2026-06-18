@@ -65,7 +65,7 @@ function EventCard({ event }) {
 
       <div className="p-3 flex flex-col flex-grow">
 
-        <p className="text-indigo-700 text-sm">
+        <p className="text-indigo-700 text-0.5xl">
           {formattedDate}
 
         </p>

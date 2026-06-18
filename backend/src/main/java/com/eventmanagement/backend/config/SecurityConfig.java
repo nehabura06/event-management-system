@@ -59,6 +59,7 @@ public class SecurityConfig {
                                 "/api/auth/login",
                                 "/api/events/**",
                                 "/api/registrations/seats/**",
+                                "/api/registrations/count/**",
                                 "/api/feedback/event/**",
                                 "/api/test/**",
                                 "/swagger-ui/**",

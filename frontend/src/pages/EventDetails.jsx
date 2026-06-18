@@ -13,6 +13,7 @@ import {
 
 import {
   getAvailableSeats,
+  getEventRegistrationCount,
   registerForEvent,
   cancelRegistration,
   checkRegistration,
@@ -26,6 +27,10 @@ import {
   submitFeedback,
   checkFeedback,
 } from "../services/feedbackService";
+
+import {
+  getSchedules
+} from "../services/scheduleService";
 
 function EventDetails() {
 
@@ -45,9 +50,17 @@ function EventDetails() {
     setAvailableSeats] =
     useState(0);
 
+   const [registrationCount,
+     setRegistrationCount] =
+     useState(0);
+
   const [registered,
     setRegistered] =
     useState(false);
+
+  const [schedules,
+    setSchedules] =
+    useState([]);
 
   const [feedbacks,
     setFeedbacks] =
@@ -91,11 +104,25 @@ const [feedbackSubmitted,
         seatsResponse.data
       );
 
+      const registrationResponse =
+        await getEventRegistrationCount(id);
+
+      setRegistrationCount(
+        registrationResponse.data
+      );
+
       const feedbackResponse =
         await getFeedbackByEvent(id);
 
       setFeedbacks(
         feedbackResponse.data
+      );
+
+      const scheduleResponse =
+        await getSchedules(id);
+
+      setSchedules(
+        scheduleResponse.data
       );
 
       if (role === "ATTENDEE") {
@@ -171,29 +198,6 @@ const [feedbackSubmitted,
 
           return;
         }
-//         try {
-//
-//           const response =
-//             await registerForEvent(
-//               id
-//             );
-//
-//           alert(
-//             response.data
-//           );
-//
-//           setRegistered(true);
-//
-//           fetchEvent();
-//
-//         } catch (error) {
-//
-//           alert(
-//             error.response?.data ||
-//             "Registration failed"
-//           );
-//
-//         }
 try {
 
   setRegisterLoading(true);
@@ -363,7 +367,7 @@ return (
 
           <h1
             className="
-              text-3xl md:text-4xl
+              text-3xl md:text-3xl
               font-bold
               mt-4
               text-gray-900
@@ -390,8 +394,8 @@ return (
             className="
               grid
               md:grid-cols-2
-              gap-4
-              mt-4
+              gap-3
+              mt-3
             "
           >
 
@@ -451,15 +455,15 @@ return (
               </p>
             </div>
 
-            <div className="bg-gray-50 p-3 rounded-2xl">
-              <h3 className="font-semibold">
-                Seats Left
-              </h3>
+{/*             <div className="bg-gray-50 p-3 rounded-2xl"> */}
+{/*               <h3 className="font-semibold"> */}
+{/*                 Seats Left */}
+{/*               </h3> */}
 
-              <p className="text-gray-600 mt-2">
-                {availableSeats}
-              </p>
-            </div>
+{/*               <p className="text-gray-600 mt-2"> */}
+{/*                 {availableSeats} */}
+{/*               </p> */}
+{/*             </div> */}
             <div className="bg-gray-50 p-3 rounded-2xl">
               <h3 className="font-semibold">
                 Organizer
@@ -482,27 +486,214 @@ return (
 
           </div>
 
+{/* Registration Status */}
+<div
+  className="
+    mt-4
+    bg-indigo-50
+    border
+    border-indigo-100
+    rounded-2xl
+    p-4
+  "
+>
+
+  <h2
+    className="
+      text-xl
+      font-bold
+      text-indigo-700
+      mb-2
+    "
+  >
+    Registration Status
+  </h2>
+
+  <div
+    className="
+      flex
+      justify-around
+      text-center
+      mt-2
+    "
+  >
+
+    <div>
+
+      <p
+        className="
+          text-gray-600
+          text-sm
+        "
+      >
+        Registered Attendees
+      </p>
+
+      <p
+        className="
+          text-2xl
+          font-bold
+          text-indigo-700
+          mt-2
+        "
+      >
+        {registrationCount}
+      </p>
+
+    </div>
+
+    <div>
+
+      <p
+        className="
+          text-gray-600
+          text-sm
+        "
+      >
+        Seats Remaining
+      </p>
+
+      <p
+        className="
+          text-2xl
+          font-bold
+          text-purple-700
+          mt-2
+        "
+      >
+        {availableSeats}
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
                     {/* Schedule */}
 
-                    <div className="mt-4">
+                    {/* Event Schedule */}
 
-                      <h2 className="text-2xl font-bold">
+                    <div className="mt-8">
+
+                      <h2
+                        className="
+                          text-2xl
+                          font-bold
+                          mb-6
+                        "
+                      >
                         Event Schedule
                       </h2>
 
-                      <div
-                        className="
-                          mt-3
-                          bg-indigo-50
-                          p-5
-                          rounded-2xl
-                        "
-                      >
-                        <p className="text-gray-700">
-                          Detailed schedules will be
-                          integrated later.
-                        </p>
-                      </div>
+                      {
+                        schedules.length === 0 ? (
+
+                          <div
+                            className="
+                              bg-indigo-50
+                              p-5
+                              rounded-2xl
+                            "
+                          >
+                            No schedule available.
+                          </div>
+
+                        ) : (
+
+                          <div className="space-y-6">
+
+                            {schedules.map(
+                              (schedule) => (
+
+                                <div
+                                  key={schedule.id}
+                                  className="
+                                    flex
+                                    gap-3
+                                  "
+                                >
+
+                                  {/* Timeline Dot */}
+
+                                  <div
+                                    className="
+                                      flex
+                                      flex-col
+                                      items-center
+                                    "
+                                  >
+
+                                    <div
+                                      className="
+                                        w-4
+                                        h-4
+                                        rounded-full
+                                        bg-indigo-600
+                                      "
+                                    />
+
+                                    <div
+                                      className="
+                                        w-[1.5px]
+                                        h-full
+                                        bg-gray-300
+                                      "
+                                    />
+
+                                  </div>
+
+                                  {/* Content */}
+
+                                  <div>
+
+                                    <p
+                                      className="
+                                        text-indigo-700
+                                        font-bold
+                                      "
+                                    >
+                                      {
+                                        new Date(
+                                          `1970-01-01T${schedule.startTime}`
+                                        ).toLocaleTimeString(
+                                          "en-IN",
+                                          {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            hour12: true
+                                          }
+                                        )
+                                      }
+                                    </p>
+
+                                    <h3
+                                      className="
+                                        font-semibold
+                                        text-lg
+                                      "
+                                    >
+                                      {schedule.sessionTitle}
+                                    </h3>
+
+                                    <p
+                                      className="
+                                        text-gray-600
+                                      "
+                                    >
+                                      {schedule.description}
+                                    </p>
+
+                                  </div>
+
+                                </div>
+
+                              )
+                            )}
+
+                          </div>
+
+                        )
+                      }
 
                     </div>
                               {/* Feedback Section */}

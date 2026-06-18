@@ -23,4 +23,8 @@ public interface RegistrationRepository
     List<Registration> findByEvent(Event event);
 
     long countByEvent(Event event);
+
+    List<Registration> findByEvent_CreatedBy(User user);
+
+    long countByEvent_CreatedBy(User user);
 }

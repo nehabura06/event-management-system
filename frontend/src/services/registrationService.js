@@ -45,3 +45,16 @@ export const checkRegistration = (
     `${API_URL}/check/${eventId}`,
     getAuthHeader()
   );
+
+export const getEventRegistrationCount =
+  (eventId) =>
+    axios.get(
+      `${API_URL}/count/${eventId}`
+    );
+
+export const getOrganizerRegistrationCount =
+  () =>
+    axios.get(
+      `${API_URL}/organizer/count`,
+      getAuthHeader()
+    );

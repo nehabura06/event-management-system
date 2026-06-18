@@ -57,4 +57,7 @@ public class Event {
     private User createdBy;
 
     private LocalDateTime createdAt;
+
+    @Transient
+    private Long registrationCount;
 }

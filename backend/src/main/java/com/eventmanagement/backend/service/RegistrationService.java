@@ -161,4 +161,31 @@ public class RegistrationService {
         return registrationRepository
                 .existsByUserAndEvent(user, event);
     }
+
+    public long getOrganizerRegistrations(
+            String email) {
+
+        User user =
+                userRepository
+                        .findByEmail(email)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "User not found"));
+
+        return registrationRepository
+                .countByEvent_CreatedBy(user);
+    }
+
+    public long getEventRegistrationCount(
+            Long eventId) {
+
+        Event event =
+                eventRepository.findById(eventId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Event not found"));
+
+        return registrationRepository
+                .countByEvent(event);
+    }
 }

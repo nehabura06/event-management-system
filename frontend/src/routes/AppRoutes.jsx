@@ -14,6 +14,12 @@ import EventDetails from "../pages/EventDetails";
 import CreateEvent
   from "../pages/CreateEvent";
 
+import EditEvent
+  from "../pages/EditEvent";
+
+import AddSchedule
+  from "../pages/AddSchedule";
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -63,6 +69,16 @@ function AppRoutes() {
         <Route
           path="/events/:id"
           element={<EventDetails />}
+        />
+
+        <Route
+          path="/edit-event/:id"
+          element={<EditEvent />}
+        />
+
+        <Route
+          path="/add-schedule/:id"
+          element={<AddSchedule />}
         />
 
       </Routes>
