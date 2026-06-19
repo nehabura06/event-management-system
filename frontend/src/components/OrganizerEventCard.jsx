@@ -1,133 +1,12 @@
-// import { useNavigate } from "react-router-dom";
-//
-// function OrganizerEventCard({ event }) {
-//
-//   const navigate = useNavigate();
-//
-//   return (
-//
-//     <div
-//       className="
-//         bg-white
-//         rounded-3xl
-//         shadow-lg
-//         p-5
-//         hover:-translate-y-1
-//         transition
-//       "
-//     >
-//
-//       <h3
-//         className="
-//           text-xl
-//           font-bold
-//           text-indigo-700
-//         "
-//       >
-//         {event.title}
-//       </h3>
-//
-//       <p className="mt-3 text-gray-600">
-//         📍 {event.venue}
-//       </p>
-//
-//       <p className="text-gray-600">
-//         📅 {event.date}
-//         {event.endDate &&
-//           ` - ${event.endDate}`}
-//       </p>
-//
-//       <p className="text-gray-600">
-//         ⏰ {event.time}
-//       </p>
-//
-//       <p className="text-purple-600 mt-1">
-//         👥 Capacity:
-//         {" "}
-//         {event.capacity}
-//       </p>
-//
-//       <p className="text-gray-500 mt-1">
-//         🏷 {event.category}
-//       </p>
-//
-//       <div
-//         className="
-//           mt-5
-//           flex
-//           gap-2
-//         "
-//       >
-//
-//         <button
-//           onClick={() =>
-//             navigate(
-//               `/events/${event.id}`
-//             )
-//           }
-//           className="
-//             flex-1
-//             border
-//             border-indigo-500
-//             text-indigo-600
-//             py-2
-//             rounded-xl
-//             font-medium
-//           "
-//         >
-//           View
-//         </button>
-//
-//         <button
-//           disabled
-//           className="
-//             flex-1
-//             bg-amber-100
-//             text-amber-700
-//             py-2
-//             rounded-xl
-//             font-medium
-//             cursor-not-allowed
-//           "
-//         >
-//           Edit
-//         </button>
-//
-//         <button
-//           onClick={() =>
-//             navigate(
-//               `/add-schedule/${event.id}`
-//             )
-//           }
-//           className="
-//             flex-1
-//             bg-gradient-to-r
-//             from-indigo-600
-//             to-purple-600
-//             text-white
-//             py-2
-//             rounded-xl
-//             font-medium
-//           "
-//         >
-//           Schedule
-//         </button>
-//
-//       </div>
-//
-//     </div>
-//
-//   );
-// }
-//
-// export default OrganizerEventCard;
-
-
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 function OrganizerEventCard({ event }) {
 
   const navigate = useNavigate();
+  const [showMenu, setShowMenu] =
+    useState(false);
 
   const formattedDate =
     new Date(event.date)
@@ -155,6 +34,85 @@ function OrganizerEventCard({ event }) {
         p-6
       "
     >
+     {/* Three Dots Menu */}
+
+      <div
+        className="
+          flex
+          justify-end
+          relative
+        "
+      >
+
+        <button
+          onClick={() =>
+            setShowMenu(
+              !showMenu
+            )
+          }
+          className="
+            text-gray-500
+            hover:text-gray-700
+          "
+        >
+          <BsThreeDotsVertical
+            size={20}
+          />
+        </button>
+
+        {showMenu && (
+
+          <div
+            className="
+              absolute
+              top-8
+              right-0
+              bg-white
+              shadow-lg
+              rounded-xl
+              border
+              w-40
+              z-10
+              overflow-hidden
+            "
+          >
+
+            <button
+              onClick={() =>
+                navigate(
+                  `/edit-event/${event.id}`
+                )
+              }
+              className="
+                w-full
+                text-left
+                px-4
+                py-3
+                hover:bg-gray-100
+              "
+            >
+              Edit Event
+            </button>
+
+            <button
+              className="
+                w-full
+                text-left
+                px-4
+                py-3
+                text-red-600
+                hover:bg-red-50
+              "
+            >
+              Delete Event
+            </button>
+
+          </div>
+
+        )}
+
+      </div>
+
 
       <p
         className="
@@ -229,7 +187,7 @@ function OrganizerEventCard({ event }) {
       <div
         className="
           mt-auto
-          pt-5
+          pt-4
           flex
           gap-2
         "
@@ -256,23 +214,23 @@ function OrganizerEventCard({ event }) {
           View
         </button>
 
-        <button
-          onClick={() =>
-            navigate(
-              `/edit-event/${event.id}`
-            )
-          }
-          className="
-            flex-1
-            bg-amber-100
-            text-amber-700
-            py-2
-            rounded-xl
-            font-medium
-          "
-        >
-          Edit
-        </button>
+{/*         <button */}
+{/*           onClick={() => */}
+{/*             navigate( */}
+{/*               `/edit-event/${event.id}` */}
+{/*             ) */}
+{/*           } */}
+{/*           className=" */}
+{/*             flex-1 */}
+{/*             bg-amber-100 */}
+{/*             text-amber-700 */}
+{/*             py-2 */}
+{/*             rounded-xl */}
+{/*             font-medium */}
+{/*           " */}
+{/*         > */}
+{/*           Edit */}
+{/*         </button> */}
 
         <button
           onClick={() =>

@@ -979,30 +979,6 @@ return (
 
                                             </div>
 
-                                            {/* Similar Events */}
-
-                                            <div className="mt-8">
-
-                                              <h2 className="text-2xl font-bold">
-                                                Similar Events
-                                              </h2>
-
-                                              <div
-                                                className="
-                                                  mt-3
-                                                  bg-indigo-50
-                                                  p-5
-                                                  rounded-2xl
-                                                "
-                                              >
-                                                <p className="text-gray-700">
-                                                  Similar events recommendation
-                                                  will be integrated later.
-                                                </p>
-                                              </div>
-
-                                            </div>
-
                                           </div>
 
                                         </div>

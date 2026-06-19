@@ -97,4 +97,37 @@ public class RegistrationController {
                 .getEventRegistrationCount(
                         eventId);
     }
+
+    @GetMapping("/attendee/count")
+    @PreAuthorize("hasRole('ATTENDEE')")
+    public long getRegisteredCount(
+            Authentication authentication) {
+
+        return registrationService
+                .getRegisteredEventsCount(
+                        authentication.getName()
+                );
+    }
+
+    @GetMapping("/attendee/upcoming")
+    @PreAuthorize("hasRole('ATTENDEE')")
+    public long getUpcomingCount(
+            Authentication authentication) {
+
+        return registrationService
+                .getUpcomingRegisteredEventsCount(
+                        authentication.getName()
+                );
+    }
+
+    @GetMapping("/attendee/past")
+    @PreAuthorize("hasRole('ATTENDEE')")
+    public long getPastCount(
+            Authentication authentication) {
+
+        return registrationService
+                .getPastRegisteredEventsCount(
+                        authentication.getName()
+                );
+    }
 }

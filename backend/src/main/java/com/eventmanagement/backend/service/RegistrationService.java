@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -32,6 +33,54 @@ public class RegistrationService {
         this.userRepository = userRepository;
         this.emailService =
                 emailService;
+    }
+
+    public long getRegisteredEventsCount(
+            String email) {
+
+        User user =
+                userRepository
+                        .findByEmail(email)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "User not found"));
+
+        return registrationRepository
+                .countByUser(user);
+    }
+
+    public long getUpcomingRegisteredEventsCount(
+            String email) {
+
+        User user =
+                userRepository
+                        .findByEmail(email)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "User not found"));
+
+        return registrationRepository
+                .countByUserAndEvent_DateGreaterThanEqual(
+                        user,
+                        LocalDate.now()
+                );
+    }
+
+    public long getPastRegisteredEventsCount(
+            String email) {
+
+        User user =
+                userRepository
+                        .findByEmail(email)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "User not found"));
+
+        return registrationRepository
+                .countByUserAndEvent_DateLessThan(
+                        user,
+                        LocalDate.now()
+                );
     }
 
     public String registerForEvent(

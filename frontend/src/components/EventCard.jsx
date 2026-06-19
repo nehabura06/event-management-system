@@ -18,52 +18,23 @@ function EventCard({ event }) {
         }
       );
 
-  const getImage = (category) => {
-
-    switch (category) {
-
-      case "WORKSHOP":
-        return "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200";
-
-      case "CONFERENCE":
-        return "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200";
-
-      case "CULTURAL":
-        return "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200";
-
-      case "HACKATHON":
-        return "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200";
-
-      default:
-        return "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200";
-    }
-
-  };
-
 
   return (
 
     <div
       className="
         bg-white
-            rounded-3xl
-            shadow-lg
-            overflow-hidden
-            hover:-translate-y-2
-            transition
-            flex
-            flex-col
-            min-h-[460px]
-          "
+        rounded-3xl
+        shadow-lg
+        hover:-translate-y-2
+        transition
+        flex
+        flex-col
+        p-6
+        min-h-[320px]
+      "
     >
-
-      <img
-        src={getImage(event.category)}
-        alt={event.title}
-        className="h-40 w-full object-cover"
-      />
-
-      <div className="p-3 flex flex-col flex-grow">
+        <div className="flex flex-col flex-grow">
 
         <p className="text-indigo-700 text-0.5xl">
           {formattedDate}
@@ -78,7 +49,7 @@ function EventCard({ event }) {
           {event.description}
         </p>
 
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-gray-700">
           {event.venue}
         </p>
 

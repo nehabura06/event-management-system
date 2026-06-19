@@ -39,34 +39,6 @@ function UpcomingEvents() {
 
   };
 
-  const getImage = (category) => {
-
-    switch (category) {
-
-      case "WORKSHOP":
-        return "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200";
-
-      case "CONFERENCE":
-        return "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200";
-
-      case "CULTURAL":
-        return "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200";
-
-      case "HACKATHON":
-        return "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200";
-
-      case "SEMINAR":
-        return "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200";
-
-      case "COMPETITION":
-        return "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200";
-
-      default:
-        return "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200";
-
-    }
-
-  };
 
   return (
 
@@ -129,31 +101,18 @@ function UpcomingEvents() {
                   bg-white
                   rounded-3xl
                   shadow-lg
-                  overflow-hidden
                   hover:-translate-y-2
                   transition
                   flex
                   flex-col
-                 min-h-[460px]
+                  min-h-[320px]
+                  p-6
 
                 "
               >
 
-                <img
-                  src={getImage(
-                    event.category
-                  )}
-                  alt={event.title}
-                  className="
-                    h-40
-                    w-full
-                    object-cover
-                  "
-                />
-
                 <div
                   className="
-                    p-4
                     flex
                     flex-col
                     flex-grow

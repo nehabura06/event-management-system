@@ -76,12 +76,6 @@ function OrganizerDashboard() {
 
     };
 
-//   const upcomingCount =
-//     events.filter(
-//       event =>
-//         new Date(event.date)
-//         >= new Date()
-//     ).length;
 const today = new Date();
 
 today.setHours(0, 0, 0, 0);

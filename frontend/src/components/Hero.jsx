@@ -14,7 +14,7 @@ function Hero() {
             Event Management Made Easy
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900">
+          <h1 className="text-4xl md:text-4.5xl font-bold leading-tight text-gray-900">
 
             Manage and Participate in
             <span className="text-indigo-700">
@@ -23,7 +23,7 @@ function Hero() {
 
           </h1>
 
-          <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+          <p className="mt-5 text-lg text-gray-600 leading-relaxed">
 
             Discover workshops, seminars,
             hackathons and cultural events
@@ -32,7 +32,7 @@ function Hero() {
 
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-7 flex flex-wrap gap-4">
 
             <Link
               to="/events"
@@ -76,7 +76,7 @@ function Hero() {
         <div className="relative">
 
           <img
-            src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200"
+            src="https://thumbs.dreamstime.com/b/agenda-time-management-little-people-write-notes-diary-organizer-strategy-development-task-planning-app-achieving-goal-184432696.jpg"
             alt="Event"
             className="
               rounded-3xl

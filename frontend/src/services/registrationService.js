@@ -58,3 +58,31 @@ export const getOrganizerRegistrationCount =
       `${API_URL}/organizer/count`,
       getAuthHeader()
     );
+
+export const getRegisteredEventsCount =
+  () =>
+    axios.get(
+      `${API_URL}/attendee/count`,
+      getAuthHeader()
+    );
+
+export const getUpcomingRegisteredCount =
+  () =>
+    axios.get(
+      `${API_URL}/attendee/upcoming`,
+      getAuthHeader()
+    );
+
+export const getPastRegisteredCount =
+  () =>
+    axios.get(
+      `${API_URL}/attendee/past`,
+      getAuthHeader()
+    );
+
+ export const getMyRegistrations =
+   () =>
+     axios.get(
+       `${API_URL}/my`,
+       getAuthHeader()
+     );

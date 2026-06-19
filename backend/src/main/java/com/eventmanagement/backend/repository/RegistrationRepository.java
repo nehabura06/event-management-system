@@ -27,4 +27,16 @@ public interface RegistrationRepository
     List<Registration> findByEvent_CreatedBy(User user);
 
     long countByEvent_CreatedBy(User user);
+
+    long countByUser(User user);
+
+    long countByUserAndEvent_DateGreaterThanEqual(
+            User user,
+            java.time.LocalDate date
+    );
+
+    long countByUserAndEvent_DateLessThan(
+            User user,
+            java.time.LocalDate date
+    );
 }
