@@ -44,12 +44,12 @@ localStorage.setItem(
   "token",
   response.data.token
 );
-const role = getRoleFromToken();
-
-localStorage.setItem(
-  "role",
-  role
-);
+// const role = getRoleFromToken();
+//
+// localStorage.setItem(
+//   "role",
+//   role
+// );
       navigate("/");
 
     } catch (error) {

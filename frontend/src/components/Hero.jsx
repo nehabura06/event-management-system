@@ -74,7 +74,6 @@ function Hero() {
 
         {/* Right Side */}
         <div className="relative">
-
           <img
             src="https://thumbs.dreamstime.com/b/agenda-time-management-little-people-write-notes-diary-organizer-strategy-development-task-planning-app-achieving-goal-184432696.jpg"
             alt="Event"
