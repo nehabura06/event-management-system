@@ -98,17 +98,6 @@ function AddSchedule() {
 
         setLoading(true);
 
-//         await addSchedule(
-//           scheduleData
-//         );
-//
-//         alert(
-//           "Schedule added successfully"
-//         );
-//
-//         navigate(
-//           "/organizer"
-//         );
 await addSchedule(
   scheduleData
 );

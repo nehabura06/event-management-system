@@ -45,9 +45,9 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventCategory category;
 
-    private String organizer;      // NEW
+    private String organizer;
 
-    private String contactEmail;   // NEW
+    private String contactEmail;  
 
     @ManyToOne
     @JoinColumn(name = "created_by")

@@ -211,18 +211,6 @@ localStorage.setItem(
             </select>
           </div>
 
-          {/* Terms */}
-{/*           <p className="text-sm text-center text-gray-600"> */}
-{/*             I agree to the{" "} */}
-{/*             <span className="text-indigo-700 font-medium"> */}
-{/*               Terms of Service */}
-{/*             </span>{" "} */}
-{/*             and{" "} */}
-{/*             <span className="text-indigo-700 font-medium"> */}
-{/*               Privacy Policy */}
-{/*             </span> */}
-{/*           </p> */}
-
           {/* Register Button */}
           <button
             type="submit"

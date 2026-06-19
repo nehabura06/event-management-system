@@ -6,11 +6,6 @@ import Footer from "../components/Footer";
 
 import { createEvent, getEventById, updateEvent }
   from "../services/eventService";
-//
-// import {
-//   getEventById,
-//   updateEvent
-// } from "../services/eventService";
 
 function CreateEvent() {
 

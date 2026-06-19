@@ -403,10 +403,6 @@ return (
               <h3 className="font-semibold">
                 Date
               </h3>
-
-{/*               <p className="text-gray-600 mt-2"> */}
-{/*                 {formattedDate} */}
-{/*               </p> */}
 <p className="text-gray-600 mt-2">
 
   {formattedDate}
@@ -454,16 +450,6 @@ return (
                 {event.venue}
               </p>
             </div>
-
-{/*             <div className="bg-gray-50 p-3 rounded-2xl"> */}
-{/*               <h3 className="font-semibold"> */}
-{/*                 Seats Left */}
-{/*               </h3> */}
-
-{/*               <p className="text-gray-600 mt-2"> */}
-{/*                 {availableSeats} */}
-{/*               </p> */}
-{/*             </div> */}
             <div className="bg-gray-50 p-3 rounded-2xl">
               <h3 className="font-semibold">
                 Organizer

@@ -214,24 +214,6 @@ function OrganizerEventCard({ event }) {
           View
         </button>
 
-{/*         <button */}
-{/*           onClick={() => */}
-{/*             navigate( */}
-{/*               `/edit-event/${event.id}` */}
-{/*             ) */}
-{/*           } */}
-{/*           className=" */}
-{/*             flex-1 */}
-{/*             bg-amber-100 */}
-{/*             text-amber-700 */}
-{/*             py-2 */}
-{/*             rounded-xl */}
-{/*             font-medium */}
-{/*           " */}
-{/*         > */}
-{/*           Edit */}
-{/*         </button> */}
-
         <button
           onClick={() =>
             navigate(

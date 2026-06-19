@@ -220,8 +220,6 @@ public List<Event> searchEvents(String keyword) {
                         .orElseThrow(() ->
                                 new RuntimeException(
                                         "User not found"));
-//        return eventRepository
-//                .findByCreatedBy(user);
         List<Event> events =
                 eventRepository.findByCreatedBy(user);
 

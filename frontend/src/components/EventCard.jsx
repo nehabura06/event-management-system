@@ -1,11 +1,8 @@
 import { useNavigate } from "react-router-dom";
-// import { getUserRole } from "../utils/eventUtils";
 
 function EventCard({ event }) {
 
   const navigate = useNavigate();
-
-//   const role = getUserRole();
 
   const formattedDate =
     new Date(event.date)
