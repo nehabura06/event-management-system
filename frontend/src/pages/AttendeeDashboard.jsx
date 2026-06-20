@@ -66,20 +66,33 @@ function AttendeeDashboard() {
 
       try {
 
-        const registeredResponse =
-          await getRegisteredEventsCount();
-
-        const upcomingResponse =
-          await getUpcomingRegisteredCount();
-
-        const pastResponse =
-          await getPastRegisteredCount();
-
-        const availableResponse =
-          await getUpcomingEvents();
-
-        const registrationsResponse =
-          await getMyRegistrations();
+//         const registeredResponse =
+//           await getRegisteredEventsCount();
+//
+//         const upcomingResponse =
+//           await getUpcomingRegisteredCount();
+//
+//         const pastResponse =
+//           await getPastRegisteredCount();
+//
+//         const availableResponse =
+//           await getUpcomingEvents();
+//
+//         const registrationsResponse =
+//           await getMyRegistrations();
+const [
+  registeredResponse,
+  upcomingResponse,
+  pastResponse,
+  availableResponse,
+  registrationsResponse
+] = await Promise.all([
+  getRegisteredEventsCount(),
+  getUpcomingRegisteredCount(),
+  getPastRegisteredCount(),
+  getUpcomingEvents(),
+  getMyRegistrations()
+]);
 
         setRegisteredCount(
           registeredResponse.data

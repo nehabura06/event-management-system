@@ -2,6 +2,7 @@ package com.eventmanagement.backend.repository;
 
 import com.eventmanagement.backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.eventmanagement.backend.enums.Role;
 
 import java.util.Optional;
 
@@ -10,5 +11,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    long countByRole(Role role);
+
 
 }

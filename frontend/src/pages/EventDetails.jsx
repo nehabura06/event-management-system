@@ -940,7 +940,7 @@ return (
                                                       from-indigo-600
                                                       to-purple-600
                                                       text-white
-                                                      text-xl
+                                                      text-0.5xl
                                                       font-medium
                                                       hover:scale-[1.02]
                                                       transition
