@@ -1,1 +1,2 @@
-# event-management-system
+# EventSphere - Event Management System
+
