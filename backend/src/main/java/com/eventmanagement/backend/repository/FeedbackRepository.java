@@ -16,4 +16,5 @@ public interface FeedbackRepository
 
     List<Feedback> findByEvent(
             Event event);
+    void deleteByEvent(Event event);
 }

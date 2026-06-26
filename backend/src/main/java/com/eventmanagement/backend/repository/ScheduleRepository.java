@@ -10,4 +10,6 @@ public interface ScheduleRepository
         extends JpaRepository<Schedule, Long> {
 
     List<Schedule> findByEvent(Event event);
+
+    void deleteByEvent(Event event);
 }

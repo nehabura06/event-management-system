@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { deleteEvent } from "../services/eventService";
 
-function OrganizerEventCard({ event }) {
+function OrganizerEventCard({ event, onDelete }) {
 
   const navigate = useNavigate();
   const [showMenu, setShowMenu] =
@@ -18,6 +19,44 @@ function OrganizerEventCard({ event }) {
           year: "numeric",
         }
       );
+  const handleDelete =
+    async () => {
+
+      const confirmDelete =
+        window.confirm(
+          "Are you sure you want to delete this event?\n\nThis action cannot be undone."
+        );
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      try {
+
+        await deleteEvent(
+          event.id
+        );
+
+        alert(
+          "Event deleted successfully."
+        );
+
+        if (onDelete) {
+          onDelete();
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          error.response?.data ||
+          "Failed to delete event."
+        );
+
+      }
+
+    };
 
   return (
 
@@ -95,6 +134,7 @@ function OrganizerEventCard({ event }) {
             </button>
 
             <button
+             onClick={handleDelete}
               className="
                 w-full
                 text-left

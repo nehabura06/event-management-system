@@ -43,7 +43,7 @@ public class EventController {
         return eventService.getEventById(id);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','ORGANIZER')")
     @DeleteMapping("/{id}")
     public String deleteEvent(
             @PathVariable Long id) {

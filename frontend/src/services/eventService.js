@@ -66,3 +66,15 @@ export const createEvent = (
           },
         }
       );
+    export const deleteEvent = (id) =>
+      axios.delete(
+        `${API_URL}/${id}`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${localStorage.getItem(
+                "token"
+              )}`,
+          },
+        }
+      );

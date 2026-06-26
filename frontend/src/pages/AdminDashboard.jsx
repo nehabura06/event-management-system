@@ -107,39 +107,105 @@ function AdminDashboard() {
 
     };
 
-  const handleDeleteUser =
-    async (id) => {
+//   const handleDeleteUser =
+//     async (id) => {
+//
+//       if (
+//         !window.confirm(
+//           "Delete this user?"
+//         )
+//       ) {
+//         return;
+//       }
+//
+//       await deleteUser(id);
+//
+//       fetchData();
+//
+//     };
+const handleDeleteUser =
+  async (id) => {
 
-      if (
-        !window.confirm(
-          "Delete this user?"
-        )
-      ) {
-        return;
-      }
+    const confirmDelete =
+      window.confirm(
+        "Are you sure you want to delete this user?\n\nThis action cannot be undone."
+      );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    try {
 
       await deleteUser(id);
 
       fetchData();
 
-    };
+      alert(
+        "User deleted successfully."
+      );
 
-  const handleDeleteEvent =
-    async (id) => {
+    } catch (error) {
 
-      if (
-        !window.confirm(
-          "Delete this event?"
-        )
-      ) {
-        return;
-      }
+      alert(
+        "Failed to delete user."
+      );
+
+      console.error(error);
+
+    }
+
+  };
+
+//   const handleDeleteEvent =
+//     async (id) => {
+//
+//       if (
+//         !window.confirm(
+//           "Delete this event?"
+//         )
+//       ) {
+//         return;
+//       }
+//
+//       await deleteEvent(id);
+//
+//       fetchData();
+//
+//     };
+const handleDeleteEvent =
+  async (id) => {
+
+    const confirmDelete =
+      window.confirm(
+        "Are you sure you want to delete this event?\n\nThis action cannot be undone."
+      );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    try {
 
       await deleteEvent(id);
 
       fetchData();
 
-    };
+      alert(
+        "Event deleted successfully."
+      );
+
+    } catch (error) {
+
+      alert(
+        "Failed to delete event."
+      );
+
+      console.error(error);
+
+    }
+
+  };
 
   if (loading) {
 

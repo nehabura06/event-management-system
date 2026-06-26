@@ -39,4 +39,6 @@ public interface RegistrationRepository
             User user,
             java.time.LocalDate date
     );
+
+    void deleteByEvent(Event event);
 }

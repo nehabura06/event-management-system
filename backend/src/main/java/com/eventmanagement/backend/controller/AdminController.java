@@ -6,6 +6,7 @@ import com.eventmanagement.backend.enums.Role;
 import com.eventmanagement.backend.repository.EventRepository;
 import com.eventmanagement.backend.repository.RegistrationRepository;
 import com.eventmanagement.backend.repository.UserRepository;
+import com.eventmanagement.backend.service.EventService;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +27,13 @@ public class AdminController {
 
     private final RegistrationRepository registrationRepository;
 
+    private final EventService eventService;
+
     public AdminController(
             UserRepository userRepository,
             EventRepository eventRepository,
-            RegistrationRepository registrationRepository) {
+            RegistrationRepository registrationRepository,
+            EventService eventService) {
 
         this.userRepository =
                 userRepository;
@@ -39,6 +43,8 @@ public class AdminController {
 
         this.registrationRepository =
                 registrationRepository;
+        this.eventService =
+                eventService;
     }
 
     @GetMapping("/stats")
@@ -97,14 +103,20 @@ public class AdminController {
 
         return eventRepository.findAll();
     }
-    @DeleteMapping("/events/{id}")
-    public String deleteEvent(
-            @PathVariable Long id) {
+//    @DeleteMapping("/events/{id}")
+//    public String deleteEvent(
+//            @PathVariable Long id) {
+//
+//        eventRepository.deleteById(id);
+//
+//        return "Event deleted";
+//    }
+@DeleteMapping("/events/{id}")
+public String deleteEvent(
+        @PathVariable Long id) {
 
-        eventRepository.deleteById(id);
-
-        return "Event deleted";
-    }
+    return eventService.deleteEvent(id);
+}
 
     @GetMapping("/insights")
     public Map<String, Object> insights() {

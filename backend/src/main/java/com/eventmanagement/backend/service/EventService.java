@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.eventmanagement.backend.enums.EventCategory;
 import com.eventmanagement.backend.entity.User;
 import com.eventmanagement.backend.repository.UserRepository;
+import com.eventmanagement.backend.repository.ScheduleRepository;
+import com.eventmanagement.backend.repository.FeedbackRepository;
+import org.springframework.transaction.annotation.Transactional;
+import com.eventmanagement.backend.enums.Role;
 import java.time.LocalDate;
 
 import java.time.LocalDateTime;
@@ -20,16 +24,24 @@ public class EventService {
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
     private final RegistrationRepository registrationRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final FeedbackRepository feedbackRepository;
 
     public EventService(EventRepository eventRepository,
                         UserRepository userRepository,
-                        RegistrationRepository registrationRepository) {
+                        RegistrationRepository registrationRepository,
+                        ScheduleRepository scheduleRepository,
+                        FeedbackRepository feedbackRepository) {
         this.eventRepository =
                 eventRepository;
         this.userRepository =
                 userRepository;
         this.registrationRepository =
                 registrationRepository;
+        this.scheduleRepository =
+                scheduleRepository;
+        this.feedbackRepository =
+                feedbackRepository;
     }
 
     public String createEvent(EventRequest request,
@@ -90,12 +102,59 @@ public class EventService {
                         new RuntimeException("Event not found"));
     }
 
+    @Transactional
     public String deleteEvent(Long id) {
 
-        eventRepository.deleteById(id);
+        Event event =
+                eventRepository.findById(id)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Event not found"));
+
+        registrationRepository.deleteByEvent(event);
+
+        scheduleRepository.deleteByEvent(event);
+
+        feedbackRepository.deleteByEvent(event);
+
+        eventRepository.delete(event);
 
         return "Event deleted successfully";
     }
+//@Transactional
+//public String deleteEvent(
+//        Long id,
+//        String email) {
+//
+//    Event event =
+//            eventRepository.findById(id)
+//                    .orElseThrow(() ->
+//                            new RuntimeException(
+//                                    "Event not found"));
+//
+//    User user =
+//            userRepository.findByEmail(email)
+//                    .orElseThrow(() ->
+//                            new RuntimeException(
+//                                    "User not found"));
+//
+//    if (user.getRole() != Role.ADMIN &&
+//            !event.getCreatedBy().getId().equals(user.getId())) {
+//
+//        throw new RuntimeException(
+//                "You can only delete your own events.");
+//    }
+//
+//    registrationRepository.deleteByEvent(event);
+//
+//    scheduleRepository.deleteByEvent(event);
+//
+//    feedbackRepository.deleteByEvent(event);
+//
+//    eventRepository.delete(event);
+//
+//    return "Event deleted successfully";
+//}
 
     public String updateEvent(Long id, EventRequest request) {
 

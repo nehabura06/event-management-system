@@ -401,6 +401,7 @@ const pastCount =
                   <OrganizerEventCard
                     key={event.id}
                     event={event}
+                    onDelete={fetchMyEvents}
                   />
 
                 )
